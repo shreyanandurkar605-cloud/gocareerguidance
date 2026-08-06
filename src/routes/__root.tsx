@@ -77,14 +77,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "CareerAI — AI Career Guidance System" },
+      {
+        name: "description",
+        content:
+          "AI Career Guidance System that turns your skills, interests and dream job into a full career plan.",
+      },
+      { property: "og:title", content: "CareerAI — AI Career Guidance System" },
+      {
+        property: "og:description",
+        content: "Personalised AI career recommendations, roadmaps and interview tips for students.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -102,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
@@ -119,8 +124,19 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <AppProvider>
+        <div className="flex min-h-screen flex-col bg-background">
+          <NavBar />
+          <main className="flex-1">
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+          </main>
+          <footer className="border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
+            CareerAI · AI Career Guidance System · Final year project
+          </footer>
+        </div>
+        <Toaster richColors position="top-center" />
+      </AppProvider>
     </QueryClientProvider>
   );
 }
