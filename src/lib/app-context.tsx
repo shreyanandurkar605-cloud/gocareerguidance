@@ -49,7 +49,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [theme]);
 
   const login = useCallback((email: string, name?: string) => {
-    const next: User = { email, name: name?.trim() || email.split("@")[0] };
+    const next: User = { email, name: name?.trim() || email.split("@")[0] || "Student" };
     setUser(next);
     try {
       localStorage.setItem(USER_KEY, JSON.stringify(next));
